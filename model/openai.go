@@ -17,3 +17,13 @@ type OpenAIResponse struct {
 		Message Message `json:"message"`
 	} `json:"choices"`
 }
+
+func ConvertToOpenAIResponse(response ChatbotUIResponse) OpenAIResponse {
+	return OpenAIResponse{
+		Choices: []struct {
+			Message Message `json:"message"`
+		}{
+			{Message: Message{Role: "assistant", Content: response.Content}},
+		},
+	}
+}
